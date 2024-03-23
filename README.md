@@ -1,4 +1,4 @@
-# rtcontrol.py
+# urcontrol
 
 Python-based, open-source library and command-line tool to control the Steinberg UR44C Mixer and DSP.
 
@@ -7,7 +7,7 @@ Probably will work with other models like UR22C, UR24C, and UR816C with minor ch
 The goal of this project is to replace dspMixFx, as it is not available for Linux and also doesn't work under Wine.
 
 
-# Agenda
+## Agenda
 
 The UR44C has two MIDI ports available via USB: the first one is physical MIDI interface, and the second one is internally connected to the Yamaha Mixer with DSP for control purposes.
 When no drivers are installed, the device works in Class Compliant mode, and both MIDI ports are available in the system.
@@ -30,3 +30,9 @@ Currently, only a few protocol messages are recognized. If you want to recognize
 - Recognize Sysex messages for storing/loading presets and bulk configuring of the device
 - Fully recognize Sysex messages for peak meters (some work is done, but additional sections like StreamingMix, Music, Voice are not recognized yet)
 - Recognize how the 3 virtual outputs (DAW/Music/Voice) are realized and try to implement it in Linux
+
+
+## Disclaimer
+This software is developed for research purposes only.
+By using it, you do so at your own risk.
+The author have no responsibility for any consequences, including potential device brick, violating manufacturer licenses, lose device warranty etc.
