@@ -533,20 +533,38 @@ class UR44C_Params_MBComp:
 
 def open_midi_ports(args):
     midi_in = rtmidi.MidiIn()
-    try:
-        index = midi_in.get_ports().index(args.midi_in)
-    except ValueError:
-        print(f'Cannot find input midi port {args.midi_in}')
-        sys.exit(1)
+    if args.midi_in:
+        try:
+            index = midi_in.get_ports().index(args.midi_in)
+        except ValueError:
+            print(f'Cannot find input midi port {args.midi_in}')
+            sys.exit(1)
+    else:
+        index = -1
+        for i, v in enumerate(midi_in.get_ports()):
+            if 'Steinberg UR' in v:
+                index = i
+        if index == -1:
+            print(f'Cannot find Steinberg UR device')
+            sys.exit(1)
     midi_in.open_port(index)
     midi_in.ignore_types(sysex=False)
 
     midi_out = rtmidi.MidiOut()
-    try:
-        index = midi_out.get_ports().index(args.midi_out)
-    except ValueError:
-        print(f'Cannot find input midi port {args.midi_out}')
-        sys.exit(1)
+    if args.midi_out:
+        try:
+            index = midi_out.get_ports().index(args.midi_out)
+        except ValueError:
+            print(f'Cannot find input midi port {args.midi_out}')
+            sys.exit(1)
+    else:
+        index = -1
+        for i, v in enumerate(midi_out.get_ports()):
+            if 'Steinberg UR' in v:
+                index = i
+        if index == -1:
+            print(f'Cannot find Steinberg UR device')
+            sys.exit(1)
     midi_out.open_port(index)
 
     return midi_in, midi_out
@@ -557,8 +575,8 @@ def main():
     formatter = lambda prog: argparse.HelpFormatter(prog,max_help_position=45)
     parser = argparse.ArgumentParser(description='Command line tool to control UR44C by MIDI', formatter_class=formatter)
     parser.add_argument('--verbose', '-v', action='store_true', help='Verbose')
-    parser.add_argument('--midi-in', '-mi', action='store', help='Input MIDI port', metavar='PORT', default='Steinberg UR44C:Steinberg UR44C MIDI 2 24:1')
-    parser.add_argument('--midi-out', '-mo', action='store', help='Output MIDI port', metavar='PORT', default='Steinberg UR44C:Steinberg UR44C MIDI 2 24:1')
+    parser.add_argument('--midi-in', '-mi', action='store', help='Input MIDI port', metavar='PORT', default='')
+    parser.add_argument('--midi-out', '-mo', action='store', help='Output MIDI port', metavar='PORT', default='')
     parser.add_argument('--input', '-i', action='store', type=int, metavar='input', help='Input number (for Inputs, default:1)', default=1)
     parser.add_argument('--unit', '-u', action='store', metavar='UNIT', help='Unit name (default:mixer)', default='mixer')
 
