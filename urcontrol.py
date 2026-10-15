@@ -382,7 +382,7 @@ class UR44C_Params_Clean:
     Volume              = (104,    0,   100,    19,    "0   1.9  10", None)
     Distortion          = (105,    0,   100,     0,    "off  10", None)
     Blend               = (103,    0,   100,    50,    "0  5.0  10", None)
-    Modulation          = (200,    0,     2,     1,    "0:Chorus; 1:off; 2:Vibrato", None)
+    Modulation          = (116,    0,     2,     1,    "0:Chorus; 1:off; 2:Vibrato", None)
     Bass                = (106,    0,   100,    61,    "0  6.1  10", None)
     Middle              = (107,    0,   100,    50,    "0  5.0  10", None)
     Treble              = (108,    0,   100,    40,    "0  4.0  10", None)
